@@ -1,0 +1,46 @@
+name: aluweb
+description: "A new Flutter project."
+publish_to: 'none' 
+
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.13.1
+
+
+
+dependencies:
+  flutter:
+    sdk: flutter
+  url_launcher: ^6.3.3
+  flutter_svg: ^2.3.0
+
+  font_awesome_flutter: ^11.0.0
+
+  
+  cupertino_icons: ^1.0.8
+  supabase_flutter: ^2.18.3
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  
+  flutter_lints: ^6.0.0
+
+
+flutter:
+
+  
+  uses-material-design: true
+  
+  fonts:
+  - family: aluweb
+    fonts:
+    - asset: assets/fonts/Cairo-VariableFont_slnt,wght.ttf
+  assets:
+  - assets/icons/
+
+
+  

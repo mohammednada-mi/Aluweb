@@ -1,0 +1,124 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Aluweb workshop catalog",
+    "output": ".archify/architecture-aluweb-20261027-201230/aluweb.html",
+    "quality_profile": "showcase",
+    "locale": "en"
+  },
+  "components": [
+    {
+      "id": "visitor",
+      "type": "external",
+      "label": "Visitor",
+      "sublabel": "browser",
+      "pos": [40, 280],
+      "size": [120, 60]
+    },
+    {
+      "id": "vercel",
+      "type": "cloud",
+      "label": "Vercel",
+      "sublabel": "alu-web SPA",
+      "pos": [220, 280],
+      "size": [130, 60]
+    },
+    {
+      "id": "flutterWeb",
+      "type": "frontend",
+      "label": "Flutter web",
+      "sublabel": "index.html",
+      "pos": [450, 280],
+      "size": [140, 60]
+    },
+    {
+      "id": "gate",
+      "type": "security",
+      "label": "Subscription gate",
+      "sublabel": "workshops.is_active",
+      "pos": [655, 280],
+      "size": [150, 60]
+    },
+    {
+      "id": "catalog",
+      "type": "frontend",
+      "label": "MainScreen",
+      "sublabel": "products + settings",
+      "pos": [890, 280],
+      "size": [150, 60]
+    },
+    {
+      "id": "category",
+      "type": "frontend",
+      "label": "CategoryScreen",
+      "sublabel": "image grid",
+      "pos": [1095, 280],
+      "size": [130, 60]
+    },
+    {
+      "id": "inactive",
+      "type": "frontend",
+      "label": "InactiveScreen",
+      "sublabel": "site closed copy",
+      "pos": [655, 460],
+      "size": [150, 60]
+    },
+    {
+      "id": "supabase",
+      "type": "cloud",
+      "label": "Supabase",
+      "sublabel": "PostgREST",
+      "pos": [840, 80],
+      "size": [180, 60]
+    },
+    {
+      "id": "deviceApps",
+      "type": "external",
+      "label": "Device apps",
+      "sublabel": "url_launcher",
+      "pos": [890, 460],
+      "size": [150, 60]
+    }
+  ],
+  "connections": [
+    { "id": "visitor-vercel", "from": "visitor", "to": "vercel", "label": "HTTPS", "variant": "emphasis" },
+    { "id": "vercel-flutter", "from": "vercel", "to": "flutterWeb", "label": "SPA rewrite" },
+    { "id": "flutter-gate", "from": "flutterWeb", "to": "gate", "label": "runApp" },
+    { "id": "gate-supabase", "from": "gate", "to": "supabase", "label": "select workshops" },
+    { "id": "gate-catalog", "from": "gate", "to": "catalog", "label": "if active" },
+    { "id": "gate-inactive", "from": "gate", "to": "inactive", "label": "if inactive" },
+    { "id": "catalog-supabase", "from": "catalog", "to": "supabase", "label": "products, settings" },
+    { "id": "catalog-category", "from": "catalog", "to": "category", "label": "push" },
+    { "id": "category-supabase", "from": "category", "to": "supabase", "label": "select images" },
+    { "id": "catalog-device", "from": "catalog", "to": "deviceApps", "label": "tel / maps / social" }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Workshop routing",
+      "items": [
+        "The first URL path segment is the workshop slug; it defaults to amal when the path is empty",
+        "Vercel and _redirects send every path to index.html so the Flutter app can read that slug"
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "Supabase tables",
+      "items": [
+        "workshops (slug, is_active) gates the app before runApp",
+        "MainScreen reads products and settings by workshop_id; CategoryScreen reads images by category_name and workshop_id",
+        "Image bytes are loaded with Image.network from imageUrl values; this repo does not configure a storage bucket"
+      ]
+    },
+    {
+      "dot": "amber",
+      "title": "Scope",
+      "items": [
+        "This overview is the Flutter web catalog hosted on Vercel, not a native-app deploy path",
+        "firebase.json names project aluweb-f277d, but the Dart entry does not initialize Firebase",
+        "This worktree is not a git repository, so clickable source pins are omitted"
+      ]
+    }
+  ]
+}

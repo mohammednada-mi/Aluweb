@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "receiptId": "f3359e16-0ed6-4321-9d4f-29c40e651538",
+  "status": "current",
+  "command": "deliver",
+  "type": "architecture",
+  "input": "/home/mohammednada/programming/Projects AluWeb/aluweb/.archify/architecture-aluweb-20261027-201230/candidate.json",
+  "output": "/home/mohammednada/programming/Projects AluWeb/aluweb/.archify/architecture-aluweb-20261027-201230/aluweb.html",
+  "specification": {
+    "sha256": "062ce073e7b6582d557d9b3e5c47e33471037e0ff738ac59dec8aeda93d4893c",
+    "bytes": 3908
+  },
+  "artifact": {
+    "sha256": "fea45c11ad3c47cb4c02dc8c9002d2afe90c7b67c16e02ff20068cc001dfb762",
+    "bytes": 846475
+  }
+}
